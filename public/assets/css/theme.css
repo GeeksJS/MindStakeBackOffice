@@ -588,7 +588,7 @@
   --falcon-bg-shape-bg: #4695ff;
   --falcon-bg-shape-bg-ltd: linear-gradient(-45deg, #4695ff, #1970e2);
   --falcon-bg-shape-bg-dtl: linear-gradient(-45deg, #1970e2, #4695ff);
-  --falcon-line-chart-gradient: linear-gradient(-45deg, #014ba7, #0183d0);
+  --falcon-line-chart-gradient: linear-gradient(-45deg, #02630a, #00f034);
   --falcon-card-gradient: linear-gradient(-45deg, #1970e2, #4695ff);
   --falcon-progress-gradient: linear-gradient(-45deg, #1970e2, #4695ff);
   --falcon-bg-circle-shape: none;
@@ -11037,7 +11037,7 @@ fieldset:disabled .tox .tox-dialog__footer .tox-button--secondary,
 }
 
 .bg-soft-primary, .fc-timegrid .event-bg-soft-primary {
-  background-color: var(--falcon-soft-primary) !important;
+  background-color: green !important;
 }
 
 .bg-soft-secondary, .fc-timegrid .event-bg-soft-secondary {
@@ -23107,23 +23107,23 @@ html[dir=rtl] .googlemap .gm-style-iw.gm-style-iw-c button[title=Close] {
   border: 0 !important;
 }
 .fc-timegrid .event-bg-soft-primary .fc-event-main:after {
-  background-color: #2c7be5 !important;
+  background-color: green !important;
 }
 
 .bg-soft-primary .fc-event-main, .fc-timegrid .event-bg-soft-primary .fc-event-main {
-  color: #1862c6 !important;
+  color: green !important;
 }
 .bg-soft-primary .fc-event-main:after, .fc-timegrid .event-bg-soft-primary .fc-event-main:after {
-  background-color: #1862c6 !important;
+  background-color: green !important;
 }
 .bg-soft-primary .fc-list-event-time, .fc-timegrid .event-bg-soft-primary .fc-list-event-time,
 .bg-soft-primary .fc-list-event-title,
 .fc-timegrid .event-bg-soft-primary .fc-list-event-title {
-  color: #1862c6 !important;
+  color: green !important;
   font-weight: 600 !important;
 }
 .bg-soft-primary .fc-list-event-dot, .fc-timegrid .event-bg-soft-primary .fc-list-event-dot {
-  border-color: #1862c6;
+  border-color: green;
 }
 
 .fc-timegrid .event-bg-soft-secondary {
@@ -23695,7 +23695,7 @@ h5, .h5 {
 |   Background gradient
 -----------------------------------------------*/
 .bg-line-chart-gradient {
-  background-image: var(--falcon-line-chart-gradient);
+  background-image: linear-gradient(-45deg, #007e49, #00ae65);
   background-position: center;
 }
 
