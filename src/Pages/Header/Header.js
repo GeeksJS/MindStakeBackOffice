@@ -275,14 +275,14 @@ export default function Header() {
                                 data-bs-placement="left"
                                 title="Switch to dark theme"
                             >
-                                <span className="fas fa-moon fs-0" />
+                                <span className="fas fa-moon fs-0" color='green'/>
                             </label>
                         </div>
                     </li>
 
                     <li className="nav-item dropdown">
                         <a
-                            className="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait"
+                            className="nav-link notification-indicator-primary px-0 fa-icon-wait"
                             id="navbarDropdownNotification"
                             href="#"
                             role="button"
