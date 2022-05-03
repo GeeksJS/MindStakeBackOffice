@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import axiosconfig from '../../axiosConfig'
+
 
 import './Complaint.css'
 
@@ -26,7 +28,7 @@ export default function Complaint(props) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(`http://localhost:3000/users/${complaint.User}`);
+                const { data: response } = await axiosconfig.get(`/users/${complaint.User}`);
                 //console.log(complaint.User)
                 setUser(response[0].UserName);
                 //console.log(response[0])
@@ -57,7 +59,7 @@ export default function Complaint(props) {
                 'success'
               )
               const data = {Treated: true}
-              axios.put(`http://localhost:3000/complaints/treatcomplaint/${complaint._id}`,data)
+              axiosconfig.put(`/complaints/treatcomplaint/${complaint._id}`,data)
               .then(navigate('/complaints'))
 
             }
@@ -82,7 +84,7 @@ export default function Complaint(props) {
               )
               
               const data = {Treated: false}
-              axios.put(`http://localhost:3000/complaints/treatcomplaint/${complaint._id}`,data)
+              axiosconfig.put(`/complaints/treatcomplaint/${complaint._id}`,data)
 
               .then(navigate('/complaints'))
               
@@ -91,22 +93,15 @@ export default function Complaint(props) {
           
 
     }
+
+
+    
     return (
         <React.Fragment>
             <tr className="btn-reveal-trigger">
-                <td className="align-middle" style={{ width: 28 }}>
-                    <div className="form-check fs-0 mb-0 d-flex align-items-center">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="checkbox-0"
-                            data-bulk-select-row="data-bulk-select-row"
-                            
-                        />
-                    </div>
-                </td>
+               
                 <td className="order py-2 align-middle white-space-nowrap">
-                    <Link to='/projects'>
+                    <Link to='/projects' style={{color:'green'}}>
                         {" "}
                         <strong>#{complaint._id}</strong>
                     </Link>{" "}

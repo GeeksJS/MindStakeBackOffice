@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Pack from './Pack';
+import Pack from './Pack.js';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import DoneIcon from '@mui/icons-material/Done';
@@ -11,6 +11,7 @@ import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 
 import Select from 'react-select';
+import axiosconfig from '../../axiosConfig'
 import makeAnimated from 'react-select/animated';
 
 import './pack.css'
@@ -68,7 +69,7 @@ export default function Packs() {
             Features: features
         }
 
-        axios.post(`http://localhost:3000/packs/addPack`, dataI)
+        axiosconfig.post(`/packs/addPack`, dataI)
             .then(res => {
                 console.log(dataI)
                 window.location.reload()
@@ -98,7 +99,7 @@ export default function Packs() {
         const data = {
             Description: newfeature.Description
         }
-        axios.post(`http://localhost:3000/features/addFeature`, data)
+        axiosconfig.post(`/features/addFeature`, data)
             .then(res => {
                 setShowFeature(!showFeature)
                 setNewFeature({})
@@ -117,7 +118,7 @@ export default function Packs() {
     }
 
     const deleteP = (id) => {
-        axios.delete(`http://localhost:3000/packs/delete/${id}`)
+        axiosconfig.delete(`/packs/delete/${id}`)
             .then(
                 //setDPack(!dPack)
                 window.location.reload()
@@ -128,7 +129,7 @@ export default function Packs() {
     const [feature, setFeature] = useState([''])
     var feat = []
     useEffect(() => {
-        axios.get(`http://localhost:3000/features/all`).then(res => {
+        axiosconfig.get(`/features/all`).then(res => {
             // console.log(res)
             res.data.map((r) => {
                 //  console.log(r.Description)
@@ -142,7 +143,7 @@ export default function Packs() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(`http://localhost:3000/packs/`);
+                const { data: response } = await axiosconfig.get(`/packs/`);
                 setPacks(response);
                 //console.log(response)
             } catch (error) {
@@ -430,7 +431,7 @@ export default function Packs() {
                                                             options.push({ value: f, label: f })
 
                                                             const clickChip = (id) => {
-                                                                axios.delete(`http://localhost:3000/features/delete/${f}`)
+                                                                axiosconfig.delete(`/features/delete/${f}`)
                                                                     .then(res => {
                                                                         //console.log('deleted')
 

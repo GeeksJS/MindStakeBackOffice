@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import axiosconfig from '../../axiosConfig'
+
 
 export default function Project(props) {
     //console.log(props)
@@ -31,7 +33,8 @@ export default function Project(props) {
                 'success'
               )
               const data = {Approved: true}
-              axios.put(`http://localhost:3000/projects/approveproject/${project._id}`,data)
+              axiosconfig.put(`/projects/approveproject/${project._id}`,data)
+              .then(window.location.reload())
             }
           })
     }
@@ -49,11 +52,11 @@ export default function Project(props) {
             if (result.isConfirmed) {
               Swal.fire(
                 'Rejected!',
-                'The project has been rejected.',
+                'The project has been deleted.',
                 'success'
               )
-              const data = {Approved: false}
-              axios.put(`http://localhost:3000/projects/approveproject/${project._id}`,data)
+              axiosconfig.delete(`/projects/deleteproject/${project._id}`)
+              .then(window.location.reload())
               
             }
           })
@@ -72,8 +75,9 @@ export default function Project(props) {
                             >
                                 <img
                                     className="img-fluid fit-cover w-sm-100 h-sm-100 rounded-1 absolute-sm-centered"
-                                    src={`http://localhost:3000/uploads/images/${project.Picture}`}
+                                    src={`${process.env.REACT_APP_API_URL}/uploads/images/${project.Picture}`}
                                     alt=""
+                                    style={{maxHeight:'300px'}}
                                 />
                             </a>
                             {/* <div className="badge rounded-pill bg-success position-absolute top-0 end-0 me-2 mt-2 fs--2 z-index-2">
@@ -237,7 +241,7 @@ export default function Project(props) {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="mt-2">
+                                {!project.Approved && <div className="mt-2">
                                     <a
                                         className="btn btn-sm btn-success border-300 d-lg-block me-2 me-lg-0"
                                         onClick={approve}
@@ -273,7 +277,7 @@ export default function Project(props) {
                                             Reject
                                         </span>
                                     </a>
-                                </div>
+                                </div>}
                             </div>
                         </div>
                     </div>

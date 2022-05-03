@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import axiosconfig from '../../axiosConfig'
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -37,7 +38,7 @@ export default function Pack(props) {
             Features: props.feature
         }
 
-        axios.put(`http://localhost:3000/packs/update/${pack._id}`, dataI)
+        axiosconfig.put(`/packs/update/${pack._id}`, dataI)
             .then(res => {
                 console.log(dataI)
                 window.location.reload()

@@ -73,14 +73,11 @@ export default function Navbar() {
                                         <span className="nav-link-text ps-1">Admins</span>
                                     </div>
                                 </Link>
-                                {/* parent pages*/}
-                                <a
-                                    className="nav-link dropdown-indicator"
-                                    href="#user"
+                                <Link
+                                    className="nav-link"
+                                    to="users"
                                     role="button"
-                                    data-bs-toggle="collapse"
                                     aria-expanded="false"
-                                    aria-controls="user"
                                 >
                                     <div className="d-flex align-items-center">
                                         <span className="nav-link-icon">
@@ -88,33 +85,9 @@ export default function Navbar() {
                                         </span>
                                         <span className="nav-link-text ps-1">Users</span>
                                     </div>
-                                </a>
-                                <ul className="nav collapse false" id="user">
-                                    <li className="nav-item">
-                                        <Link
-                                            className="nav-link"
-                                            to='/users'
-                                            aria-expanded="false"
-                                        >
-                                            <div className="d-flex align-items-center">
-                                                <span className="nav-link-text ps-1">Users list</span>
-                                            </div>
-                                        </Link>
-                                        {/* more inner pages*/}
-                                    </li>
-                                    <li className="nav-item">
-                                        <a
-                                            className="nav-link"
-                                            href="pages/user/settings.html"
-                                            aria-expanded="false"
-                                        >
-                                            <div className="d-flex align-items-center">
-                                                <span className="nav-link-text ps-1">Users cards</span>
-                                            </div>
-                                        </a>
-                                        {/* more inner pages*/}
-                                    </li>
-                                </ul>
+                                </Link>
+                                {/* parent pages*/}
+                               
                                 {/* parent pages*/}
                                 <a
                                     className="nav-link dropdown-indicator"
@@ -131,19 +104,8 @@ export default function Navbar() {
                                         <span className="nav-link-text ps-1">Projects</span>
                                     </div>
                                 </a>
-                                <ul className="nav collapse false" id="email">
-                                    <li className="nav-item">
-                                        <a
-                                            className="nav-link"
-                                            href="app/email/inbox.html"
-                                            aria-expanded="false"
-                                        >
-                                            <div className="d-flex align-items-center">
-                                                <span className="nav-link-text ps-1">Creators</span>
-                                            </div>
-                                        </a>
-                                        {/* more inner pages*/}
-                                    </li>
+                                <ul className="nav collapse show false" id="email">
+                                    
                                     <li className="nav-item">
                                         <Link
                                             className="nav-link"
@@ -168,18 +130,7 @@ export default function Navbar() {
                                         </Link>
                                         {/* more inner pages*/}
                                     </li>
-                                    <li className="nav-item">
-                                        <a
-                                            className="nav-link"
-                                            href="app/email/compose.html"
-                                            aria-expanded="false"
-                                        >
-                                            <div className="d-flex align-items-center">
-                                                <span className="nav-link-text ps-1">Project feedbacks</span>
-                                            </div>
-                                        </a>
-                                        {/* more inner pages*/}
-                                    </li>
+                                   
                                 </ul>
 
                                 {/* parent pages*/}
@@ -198,20 +149,20 @@ export default function Navbar() {
                                         <span className="nav-link-text ps-1">Payments</span>
                                     </div>
                                 </a>
-                                <ul className="nav collapse false" id="pay">
+                                <ul className="nav collapse show false" id="pay">
                                     <li className="nav-item">
-                                        <a
+                                        <Link
                                             className="nav-link"
-                                            href="app/email/inbox.html"
+                                            to='/transactions'
                                             aria-expanded="false"
                                         >
                                             <div className="d-flex align-items-center">
                                                 <span className="nav-link-text ps-1">Transactions</span>
                                             </div>
-                                        </a>
+                                        </Link>
                                         {/* more inner pages*/}
                                     </li>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <a
                                             className="nav-link"
                                             href="app/email/email-detail.html"
@@ -221,32 +172,21 @@ export default function Navbar() {
                                                 <span className="nav-link-text ps-1">Wallets</span>
                                             </div>
                                         </a>
-                                        {/* more inner pages*/}
-                                    </li>
+                                        
+                                    </li> */}
                                     <li className="nav-item">
-                                        <a
+                                        <Link
                                             className="nav-link"
-                                            href="app/email/compose.html"
+                                            to='/donations'
                                             aria-expanded="false"
                                         >
                                             <div className="d-flex align-items-center">
                                                 <span className="nav-link-text ps-1">Donations</span>
                                             </div>
-                                        </a>
+                                        </Link>
                                         {/* more inner pages*/}
                                     </li>
-                                    <li className="nav-item">
-                                        <a
-                                            className="nav-link"
-                                            href="app/email/compose.html"
-                                            aria-expanded="false"
-                                        >
-                                            <div className="d-flex align-items-center">
-                                                <span className="nav-link-text ps-1">Cryptocurrency</span>
-                                            </div>
-                                        </a>
-                                        {/* more inner pages*/}
-                                    </li>
+                                    
                                 </ul>
 
                                 {/* parent pages*/}
@@ -279,11 +219,9 @@ export default function Navbar() {
                                 </Link>
 
                                 {/* parent pages*/}
-                                <a
+                                <Link
                                     className="nav-link"
-                                    href="app/kanban.html"
-                                    role="button"
-                                    aria-expanded="false"
+                                    to='/companies'
                                 >
                                     <div className="d-flex align-items-center">
                                         <span className="nav-link-icon">
@@ -291,22 +229,9 @@ export default function Navbar() {
                                         </span>
                                         <span className="nav-link-text ps-1">Companies</span>
                                     </div>
-                                </a>
+                                </Link>
 
-                                {/* parent pages*/}
-                                <a
-                                    className="nav-link"
-                                    href="app/kanban.html"
-                                    role="button"
-                                    aria-expanded="false"
-                                >
-                                    <div className="d-flex align-items-center">
-                                        <span className="nav-link-icon">
-                                            <span className="fas fa-comments" />
-                                        </span>
-                                        <span className="nav-link-text ps-1">Chat</span>
-                                    </div>
-                                </a>
+                                
 
                             </li>
                             

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, Route, Routes, useParams } from 'react-router-dom';
-import UserDetails from './UserDetails';
+import UserDetails from './UserDetails.js';
 
 export default function SingleUser(props) {
 
@@ -67,7 +67,7 @@ export default function SingleUser(props) {
                         <div className="d-flex d-flex align-items-center">
                             <div className="avatar avatar-xl me-2">
                                 <div className="avatar-name rounded-circle">
-                                    {user.ImageProfile !== "avatar.png" && <img src={`http://localhost:3000/uploads/images/${user.ImageProfile}`} alt="user" style={{ borderRadius: '50%' }} />}
+                                    {user.ImageProfile !== "avatar.png" && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${user.ImageProfile}`} alt="user" style={{ borderRadius: '50%' }} />}
 
                                     {user.ImageProfile === "avatar.png" && <span>{user.UserName.charAt(0).toUpperCase()}</span>}
                                 </div>
@@ -79,10 +79,10 @@ export default function SingleUser(props) {
                     </a>
                 </td>
                 <td className="email align-middle py-2">
-                    <a href="mailto:ricky@example.com">{user.Email}</a>
+                    <a href={`mailto:${user.Email}`} style={{color:'green'}}>{user.Email}</a>
                 </td>
                 <td className="phone align-middle white-space-nowrap py-2">
-                    <a href="tel:2012001851">{user.Phone}</a>
+                    <a href={`tel:${user.Phone}`} style={{color:'green'}}>{user.Phone}</a>
                 </td>
 
                 <td className="joined align-middle py-2">{user.Role}</td>

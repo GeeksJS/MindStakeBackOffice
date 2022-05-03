@@ -1,5 +1,6 @@
 "use strict";
 
+
 var _excluded = ["endValue"];
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7116,7 +7117,12 @@ var leadConversionInit = function leadConversionInit() {
 
 
 var linePaymentChartInit = function linePaymentChartInit() {
+  
   var $echartsLinePaymentChart = document.querySelector('.echart-line-payment');
+
+  // const { data: response } =  axios.get(`http://localhost:3000/users/admins`);
+  // console.log(response)
+
   var dataset = {
     all: [4, 1, 6, 2, 7, 12, 4, 6, 5, 4, 5, 10],
     successful: [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8],

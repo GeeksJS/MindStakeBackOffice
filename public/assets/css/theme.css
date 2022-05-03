@@ -453,7 +453,7 @@
   --falcon-pagination-hover-bg: #2c7be5;
   --falcon-pagination-hover-border-color: #2c7be5;
   --falcon-pagination-active-color: #fff;
-  --falcon-pagination-active-bg: #2c7be5;
+  --falcon-pagination-active-bg: #007c1f;
   --falcon-pagination-active-border-color: #2c7be5;
   --falcon-pagination-disabled-bg: #fff;
   /* ---------------------------------- Card ---------------------------------- */
@@ -7159,7 +7159,7 @@ fieldset:disabled .tox .tox-dialog__footer .tox-button--secondary,
   position: relative;
   display: block;
   color: var(--falcon-pagination-color);
-  background-color: var(--falcon-pagination-bg);
+  background-color: #007c1f;
   border: 1px solid var(--falcon-pagination-border-color);
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -7178,13 +7178,13 @@ fieldset:disabled .tox .tox-dialog__footer .tox-button--secondary,
   z-index: 2;
   color: var(--falcon-pagination-hover-color);
   text-decoration: none;
-  background-color: var(--falcon-pagination-hover-bg);
+  background-color: #007c1f;
   border-color: var(--falcon-pagination-hover-border-color);
 }
 .page-link:focus {
   z-index: 3;
   color: var(--falcon-pagination-focus-color);
-  background-color: var(--falcon-pagination-focus-bg);
+  background-color: #007c1f;
   outline: 0;
   -webkit-box-shadow: var(--falcon-pagination-focus-box-shadow);
   box-shadow: var(--falcon-pagination-focus-box-shadow);
@@ -7196,13 +7196,13 @@ fieldset:disabled .tox .tox-dialog__footer .tox-button--secondary,
 .page-item.active .page-link {
   z-index: 3;
   color: var(--falcon-pagination-active-color);
-  background-color: var(--falcon-pagination-active-bg);
+  background-color: #007c1f;
   border-color: var(--falcon-pagination-active-border-color);
 }
 .page-item.disabled .page-link {
   color: var(--falcon-pagination-disabled-color);
   pointer-events: none;
-  background-color: var(--falcon-pagination-disabled-bg);
+  background-color: #007c1f;
   border-color: var(--falcon-pagination-disabled-border-color);
 }
 
@@ -7243,6 +7243,13 @@ fieldset:disabled .tox .tox-dialog__footer .tox-button--secondary,
 .pagination-sm .page-item:last-child .page-link {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
+}
+
+.active1{
+  z-index: 3;
+  color: var(--falcon-pagination-active-color);
+  background-color: #007c1f;
+  border-color: var(--falcon-pagination-active-border-color);
 }
 
 .badge {
@@ -23695,7 +23702,6 @@ h5, .h5 {
 |   Background gradient
 -----------------------------------------------*/
 .bg-line-chart-gradient {
-  background-image: linear-gradient(-45deg, #007e49, #00ae65);
   background-position: center;
 }
 
@@ -27893,7 +27899,7 @@ div[data-collapse] + .kanban-item,
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   height: 2px;
-  background-color: #00d27a;
+  background-color: #007c1f;
 }
 .theme-wizard .nav-item-circle-parent {
   position: relative;
@@ -28757,7 +28763,7 @@ div[data-collapse] + .kanban-item,
 }
 .chart-tab .nav-link.active {
   border-bottom: 2px solid #2c7be5;
-  background-color: var(--falcon-card-bg);
+  background-color: #007c1f;
 }
 
 .timeline {

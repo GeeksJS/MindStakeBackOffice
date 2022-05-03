@@ -1,5 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import axiosconfig from '../../axiosConfig'
+
 
 export default function Profile() {
     var connected = JSON.parse(localStorage.getItem('user'))
@@ -20,7 +22,7 @@ export default function Profile() {
 
     useEffect(() => {
         const ferchData = async () => {
-            await axios.get(`http://localhost:3000/users/${connected.userId}`)
+            await axiosconfig.get(`/users/${connected.userId}`)
                 .then(res => {
                     console.log(res.data)
                     setConnect(res.data[0])
@@ -53,7 +55,7 @@ export default function Profile() {
             confirm_Email: email.confirm_Email
         }
 
-        await axios.put(`http://localhost:3000/users/changeEmail/${connected.userId}`, data)
+        await axiosconfig.put(`/users/changeEmail/${connected.userId}`, data)
             .then(res => {
                 window.location.reload()
             })
@@ -76,7 +78,7 @@ export default function Profile() {
             confirm_Password: Pwd.confirm_Password
         }
 
-        await axios.put(`http://localhost:3000/users/changePassword/${connected.userId}`, data)
+        await axiosconfig.put(`/users/changePassword/${connected.userId}`, data)
             .then(res => {
                 window.location.reload()
             })
@@ -101,7 +103,7 @@ export default function Profile() {
         data.append("Phone", editUser.Phone)
         data.append("file", imageP)
 
-        await axios.put(`http://localhost:3000/users/updateAdmin/${connected.userId}`, data)
+        await axiosconfig.put(`/users/updateAdmin/${connected.userId}`, data)
             .then(res => {
                 console.log(res.data)
 
@@ -154,7 +156,7 @@ export default function Profile() {
                                     <div className="h-100 w-100 rounded-circle overflow-hidden position-relative">
                                         {" "}
                                         <div className="avatar-name rounded-circle">
-                                            {connect.ImageProfile !== "avatar.png" && <img src={`http://localhost:3000/uploads/images/${connect.ImageProfile}`} alt="admin" style={{ borderRadius: '50%' }} />}
+                                            {connect.ImageProfile !== "avatar.png" && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${connect.ImageProfile}`} alt="admin" style={{ borderRadius: '50%' }} />}
 
                                             {connect.ImageProfile === "avatar.png" && <span>{connect.UserName.charAt(0).toUpperCase()}</span>}
                                         </div>

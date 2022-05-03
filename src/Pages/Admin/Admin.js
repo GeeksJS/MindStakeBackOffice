@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import axiosconfig from '../../axiosConfig'
 
 
 
@@ -20,7 +21,7 @@ export default function Admin() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(`http://localhost:3000/users/admins`);
+                const { data: response } = await axiosconfig.get(`/users/admins`);
                 setAdmins(response);
                 console.log(response)
             } catch (error) {
@@ -46,7 +47,7 @@ export default function Admin() {
 
 
 
-        axios.post(`http://localhost:3000/users/signup`, dataI)
+        axios.post(`${process.env.REACT_APP_API_URL}/users/signup`, dataI)
             .then(res => {
                 if (res.data == null) {
                     Swal.fire(
@@ -102,7 +103,7 @@ export default function Admin() {
                         <div className="d-flex d-flex align-items-center">
                             <div className="avatar avatar-xl me-2">
                                 <div className="avatar-name rounded-circle">
-                                    {admin.ImageProfile !== "avatar.png" && <img src={`http://localhost:3000/uploads/images/${admin.ImageProfile}`} alt="admin" style={{borderRadius:'50%'}}/>}
+                                    {admin.ImageProfile !== "avatar.png" && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${admin.ImageProfile}`} alt="admin" style={{borderRadius:'50%'}}/>}
 
                                     {admin.ImageProfile === "avatar.png" && <span>{admin.UserName.charAt(0).toUpperCase()}</span> }
                                 </div>
@@ -114,10 +115,10 @@ export default function Admin() {
                     </a>
                 </td>
                 <td className="email align-middle py-2">
-                    <a href="mailto:ricky@example.com">{admin.Email}</a>
+                    <a href={`mailto:${admin.Email}`} style={{color:'green'}}>{admin.Email}</a>
                 </td>
-                <td className="phone align-middle white-space-nowrap py-2">
-                    <a href="tel:2012001851">{admin.Phone}</a>
+                <td className="phone align-middle white-space-nowrap py-2" >
+                    <a href={`tel:${admin.Phone}`} style={{color:'green'}}>{admin.Phone}</a>
                 </td>
 
                 <td className="joined align-middle py-2">{admin.Role}</td>
@@ -413,7 +414,7 @@ export default function Admin() {
                                     </th>
                                     <th
                                         className="sort pe-1 align-middle white-space-nowrap"
-                                        data-sort="name"
+                                        data-sort="Name"
                                     >
                                         Name
                                     </th>

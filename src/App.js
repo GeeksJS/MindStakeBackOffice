@@ -2,21 +2,25 @@ import logo from './logo.svg';
 import './App.css';
 
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
-import Navbar from './Pages/Navbar/Navbar';
-import Header from './Pages/Header/Header';
-import Customization from './Pages/Customization/Customization';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import NotFound from './Pages/NotFound/NotFound';
-import Login from './Pages/Login/Login';
-import useToken from './UseToken';
-import Admin from './Pages/Admin/Admin';
-import Users from './Pages/Users/Users';
-import Project from './Pages/Project/Project';
-import Projects from './Pages/Project/Projects';
-import ProjectList from './Pages/Project/ProjectList';
-import Complaints from './Pages/Complaint/Complaints';
-import Packs from './Pages/Pack/Packs';
-import Profile from './Pages/Profile/Profile';
+import Navbar from './Pages/Navbar/Navbar.js';
+import Header from './Pages/Header/Header.js';
+import Customization from './Pages/Customization/Customization.js';
+import Dashboard from './Pages/Dashboard/Dashboard.js';
+import NotFound from './Pages/NotFound/NotFound.js';
+import Login from './Pages/Login/Login.js';
+import useToken from './UseToken.js';
+import Admin from './Pages/Admin/Admin.js';
+import Users from './Pages/Users/Users.js';
+import Project from './Pages/Project/Project.js';
+import Projects from './Pages/Project/Projects.js';
+import ProjectList from './Pages/Project/ProjectList.js';
+import Complaints from './Pages/Complaint/Complaints.js';
+import Packs from './Pages/Pack/Packs.js';
+import Profile from './Pages/Profile/Profile.js';
+import Transaction from './Pages/Transaction/Transactions';
+import Transactions from './Pages/Transaction/Transactions';
+import Donations from './Pages/Donation/Donations';
+import Companies from './Pages/Companies/Companies';
 
 function App() {
   var isFluid = JSON.parse(localStorage.getItem('isFluid'));
@@ -44,6 +48,12 @@ function App() {
               <Route exact path='/complaints' element={<Complaints />}></Route>
               <Route exact path='/packs' element={<Packs />}></Route>
               <Route exact path='/profile' element={<Profile />}></Route>
+              <Route exact path='/transactions' element={<Transactions />}></Route>
+              <Route exact path='/donations' element={<Donations />}></Route>
+              <Route exact path='/companies' element={<Companies />}></Route>
+
+
+
 
 
 

@@ -23672,7 +23672,6 @@ h5, .h5 {
 |   Background gradient
 -----------------------------------------------*/
 .bg-line-chart-gradient {
-  background-image: var(--falcon-line-chart-gradient);
   background-position: center;
 }
 

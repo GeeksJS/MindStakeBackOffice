@@ -2,9 +2,11 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import axiosconfig from '../../axiosConfig'
+
 
 export default function SingleProjectList(props) {
-    
+
     const [project, setProject] = useState(props.project)
 
     const [user, setUser] = useState('')
@@ -15,13 +17,13 @@ export default function SingleProjectList(props) {
 
 
     const start = new Date(project.CreationDate)
-    const createDate = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'numeric',day: 'numeric'}).format(start)
+    const createDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }).format(start)
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(`http://localhost:3000/users/${project.User}`);
+                const { data: response } = await axiosconfig.get(`/users/${project.User}`);
                 setUser(response[0].UserName);
                 console.log(response[0].UserName)
             } catch (error) {
@@ -34,7 +36,7 @@ export default function SingleProjectList(props) {
 
 
 
-    const approve = (e)=>{
+    const approve = (e) => {
         e.preventDefault()
         Swal.fire({
             title: 'Are you sure?',
@@ -43,22 +45,22 @@ export default function SingleProjectList(props) {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Yes, approve it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Approved!',
-                'The project has been approved.',
-                'success'
-              )
-              const data = {Approved: true}
-              axios.put(`http://localhost:3000/projects/approveproject/${project._id}`,data)
-              .then(navigate('/projects'))
+                Swal.fire(
+                    'Approved!',
+                    'The project has been approved.',
+                    'success'
+                )
+                const data = { Approved: true }
+                axiosconfig.put(`/projects/approveproject/${project._id}`, data)
+                    .then(navigate('/projects'))
 
             }
-          })
+        })
     }
 
-    const reject = (e)=>{
+    const reject = (e) => {
         e.preventDefault()
         Swal.fire({
             title: 'Are you sure?',
@@ -67,20 +69,19 @@ export default function SingleProjectList(props) {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Yes, reject it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Rejected!',
-                'The project has been rejected.',
-                'success'
-              )
-              const data = {Approved: false}
-              axios.put(`http://localhost:3000/projects/approveproject/${project._id}`,data)
-              .then(navigate('/projects'))
-              
+                Swal.fire(
+                    'Rejected!',
+                    'The project has been deleted.',
+                    'success'
+                )
+                axiosconfig.delete(`/projects/deleteproject/${project._id}`)
+                    .then(navigate('/projects'))
+
             }
-          })
-          
+        })
+
 
     }
 
@@ -99,7 +100,7 @@ export default function SingleProjectList(props) {
                             type="checkbox"
                             id="checkbox-0"
                             data-bulk-select-row="data-bulk-select-row"
-                            
+
                         />
                     </div>
                 </td>
@@ -108,25 +109,25 @@ export default function SingleProjectList(props) {
                         {" "}
                         <strong>#{project._id}</strong>
                     </Link>{" "}
-                   
+
                     <br />
                     by <strong>{user}</strong>
                 </td>
-                <td className="date py-2 align-middle" style={{width:'5px'}}>{createDate}</td>
-                <td className="address py-2 align-middle white-space-wrap" style={{maxWidth:'180px'}}>
+                <td className="date py-2 align-middle" style={{ width: '5px' }}>{createDate}</td>
+                <td className="address py-2 align-middle white-space-wrap" style={{ maxWidth: '180px' }}>
                     {project.Title}
                     <p className="mb-0 text-500">{project.Category}</p>
                 </td>
                 <td className="status py-2 align-middle text-center fs-0 white-space-nowrap">
-                    <span className={project.Approved ? "badge badge rounded-pill d-block badge-soft-success" : "badge badge rounded-pill d-block badge-soft-danger"}>
-                        {project.Approved ? "Approved" : "Rejected"}
+                    <span className={project.Approved ? "badge badge rounded-pill d-block badge-soft-success" : "badge badge rounded-pill d-block badge-soft-warning"}>
+                        {project.Approved ? "Approved" : "Pending"}
                         <svg
-                            className="svg-inline--fa fa-check fa-w-16 ms-1"
+                            className={project.Approved ? "svg-inline--fa fa-check fa-w-16 ms-1" : "svg-inline--fa fa-stream fa-w-16 ms-1"}
                             data-fa-transform="shrink-2"
                             aria-hidden="true"
                             focusable="false"
                             data-prefix="fas"
-                            data-icon="check"
+                            data-icon={project.Approved ? "check" : "stream"}
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
@@ -178,26 +179,39 @@ export default function SingleProjectList(props) {
                             </svg>
                             {/* <span class="fas fa-ellipsis-h fs--1"></span> Font Awesome fontawesome.com */}
                         </button>
-                        <div
-                            className="dropdown-menu dropdown-menu-end border py-0"
-                            aria-labelledby="order-dropdown-0"
-                            style={{}}
-                        >
-                            <div className="bg-white py-2">
-                                <a className="dropdown-item" onClick={approve}>
-                                    Approve
-                                </a>
-                                <a className="dropdown-item" >
-                                    Processing
-                                </a>
-                               
+                        {project.Approved ?
+                            <div
+                                className="dropdown-menu dropdown-menu-end border py-0"
+                                aria-labelledby="order-dropdown-0"
+                                style={{}}
+                            >
+
+
                                 
-                                <div className="dropdown-divider" />
                                 <a className="dropdown-item text-danger" onClick={reject}>
-                                    Reject
+                                    Delete
                                 </a>
                             </div>
-                        </div>
+
+                            :
+                            <div
+                                className="dropdown-menu dropdown-menu-end border py-0"
+                                aria-labelledby="order-dropdown-0"
+                                style={{}}
+                            >
+                                <div className="bg-white py-2">
+                                    <a className="dropdown-item text-success" onClick={approve}>
+                                        Approve
+                                    </a>
+
+
+
+                                    <div className="dropdown-divider" />
+                                    <a className="dropdown-item text-danger" onClick={reject}>
+                                        Reject
+                                    </a>
+                                </div>
+                            </div>}
                     </div>
                 </td>
             </tr>

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import SingleProjectList from './SingleProjectList'
+import axiosconfig from '../../axiosConfig'
+import ReactPaginate from 'react-paginate';
+import { Link } from 'react-router-dom';
+
 
 export default function ProjectList() {
 
@@ -9,7 +13,7 @@ export default function ProjectList() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(`http://localhost:3000/projects/getallprojects`);
+                const { data: response } = await axiosconfig.get(`/projects/getallprojectsadmin`);
                 setProjects(response);
                 console.log(response)
             } catch (error) {
@@ -20,6 +24,124 @@ export default function ProjectList() {
 
     }, []);
 
+    function Items({ currentItems }) {
+        return (
+            <div className="table-responsive scrollbar">
+                <table className="table table-sm table-striped fs--1 mb-0 overflow-hidden">
+                    <thead className="bg-200 text-900">
+                        <tr>
+                            <th>
+                                <div className="form-check fs-0 mb-0 d-flex align-items-center">
+                                    <input
+                                        className="form-check-input"
+                                        id="checkbox-bulk-customers-select"
+                                        type="checkbox"
+                                        data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}'
+                                    />
+                                </div>
+                            </th>
+                            <th
+                                className="sort pe-1 align-middle white-space-nowrap"
+                                data-sort="order"
+                            >
+                                Project
+                            </th>
+                            <th
+                                className="sort pe-1 align-middle white-space-nowrap pe-7"
+                                data-sort="date"
+
+                            >
+                                Date
+                            </th>
+                            <th
+                                className="sort pe-1 align-middle white-space-nowrap"
+                                data-sort="address"
+                                style={{ minWidth: "12.5rem" }}
+                            >
+                                Title
+                            </th>
+                            <th
+                                className="sort pe-1 align-middle white-space-nowrap text-center"
+                                data-sort="status"
+                            >
+                                Status
+                            </th>
+                            <th
+                                className="sort pe-1 align-middle white-space-nowrap text-end"
+                                data-sort="amount"
+                            >
+                                Goal
+                            </th>
+                            <th className="no-sort" />
+                        </tr>
+                    </thead>
+                    <tbody className="list" id="table-orders-body">
+                        {currentItems &&
+                            currentItems.map((project, index) => (
+                                <SingleProjectList key={project._id} project={project} />
+                            ))
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+    function PaginatedItems({ itemsPerPage }) {
+        // We start with an empty list of items.
+        const [currentItems, setCurrentItems] = useState(null);
+        const [pageCount, setPageCount] = useState(0);
+        // Here we use item offsets; we could also use page offsets
+        // following the API or data you're working with.
+        const [itemOffset, setItemOffset] = useState(0);
+
+        useEffect(() => {
+            // Fetch items from another resources.
+            const endOffset = itemOffset + itemsPerPage;
+            console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+            setCurrentItems(projects.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(projects.length / itemsPerPage));
+        }, [itemOffset, itemsPerPage]);
+
+        // Invoke when user click to request another page.
+        const handlePageClick = (event) => {
+            const newOffset = event.selected * itemsPerPage % projects.length;
+            console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+            setItemOffset(newOffset);
+        };
+        return (
+            <>
+                <Items currentItems={currentItems} />
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <ReactPaginate
+                        nextLabel=">"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        pageCount={pageCount}
+                        previousLabel="<"
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        previousClassName="page-item"
+                        previousLinkClassName="page-link"
+                        nextClassName="page-item"
+                        nextLinkClassName="page-link"
+                        breakLabel="..."
+                        breakClassName="page-item"
+                        breakLinkClassName="page-link"
+                        containerClassName="pagination"
+                        activeClassName="active"
+                        renderOnZeroPageCount={null}
+
+
+                    />
+                </div>
+            </>
+        );
+    }
+
+
     return (
         <React.Fragment>
             <div
@@ -28,7 +150,7 @@ export default function ProjectList() {
                 data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'
             >
                 <div className="card-header">
-                    <div className="row flex-between-center">
+                    <div className="row gx-2 align-items-center">
                         <div className="col-4 col-sm-auto d-flex align-items-center pe-0">
                             <h5 className="fs-0 mb-0 text-nowrap py-2 py-xl-0">Projects</h5>
                         </div>
@@ -77,8 +199,8 @@ export default function ProjectList() {
                                             </g>
                                         </g>
                                     </svg> */}
-                                    {/* <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> Font Awesome fontawesome.com */}
-                                    {/* <span className="d-none d-sm-inline-block ms-1">New</span> */}
+                                {/* <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> Font Awesome fontawesome.com */}
+                                {/* <span className="d-none d-sm-inline-block ms-1">New</span> */}
                                 {/* </button> */}
                                 <select className="btn btn-falcon-default btn-sm mx-2" type="button">
                                     <option>Categories</option>
@@ -120,141 +242,28 @@ export default function ProjectList() {
                                     {/* <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span> Font Awesome fontawesome.com */}
                                     <span className="d-none d-sm-inline-block ms-1">Export</span>
                                 </button>
+
                             </div>
+
+                        </div>
+                        <div class="col-auto pe-0">
+                            <Link class="text-600 px-1" to="/projects">
+                                <svg class="svg-inline--fa fa-th fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="th" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                    <path fill="currentColor" d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z">
+                                    </path>
+                                </svg>
+                            </Link>
                         </div>
                     </div>
                 </div>
                 <div className="card-body p-0">
-                    <div className="table-responsive scrollbar">
-                        <table className="table table-sm table-striped fs--1 mb-0 overflow-hidden">
-                            <thead className="bg-200 text-900">
-                                <tr>
-                                    <th>
-                                        <div className="form-check fs-0 mb-0 d-flex align-items-center">
-                                            <input
-                                                className="form-check-input"
-                                                id="checkbox-bulk-customers-select"
-                                                type="checkbox"
-                                                data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}'
-                                            />
-                                        </div>
-                                    </th>
-                                    <th
-                                        className="sort pe-1 align-middle white-space-nowrap"
-                                        data-sort="order"
-                                    >
-                                        Project
-                                    </th>
-                                    <th
-                                        className="sort pe-1 align-middle white-space-nowrap pe-7"
-                                        data-sort="date"
-                                        
-                                    >
-                                        Date
-                                    </th>
-                                    <th
-                                        className="sort pe-1 align-middle white-space-nowrap"
-                                        data-sort="address"
-                                        style={{ minWidth: "12.5rem" }}
-                                    >
-                                        Title
-                                    </th>
-                                    <th
-                                        className="sort pe-1 align-middle white-space-nowrap text-center"
-                                        data-sort="status"
-                                    >
-                                        Status
-                                    </th>
-                                    <th
-                                        className="sort pe-1 align-middle white-space-nowrap text-end"
-                                        data-sort="amount"
-                                    >
-                                        Goal
-                                    </th>
-                                    <th className="no-sort" />
-                                </tr>
-                            </thead>
-                            <tbody className="list" id="table-orders-body">
-                                {projects &&
-                                    projects.map((project, index) => (
-                                        <SingleProjectList key={index} project={project} />
-                                    ))
-                                }
 
-                            </tbody>
-                        </table>
-                    </div>
+                    <PaginatedItems itemsPerPage={5} />
+
+
+
                 </div>
-                <div className="card-footer">
-                    <div className="d-flex align-items-center justify-content-center">
-                        <button
-                            className="btn btn-sm btn-falcon-default me-1 disabled"
-                            type="button"
-                            title="Previous"
-                            data-list-pagination="prev"
-                            disabled=""
-                        >
-                            <svg
-                                className="svg-inline--fa fa-chevron-left fa-w-10"
-                                aria-hidden="true"
-                                focusable="false"
-                                data-prefix="fas"
-                                data-icon="chevron-left"
-                                role="img"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 320 512"
-                                data-fa-i2svg=""
-                            >
-                                <path
-                                    fill="currentColor"
-                                    d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"
-                                />
-                            </svg>
-                            {/* <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com */}
-                        </button>
-                        <ul className="pagination mb-0">
-                            <li className="active">
-                                <button className="page" type="button" data-i={1} data-page={10}>
-                                    1
-                                </button>
-                            </li>
-                            <li>
-                                <button className="page" type="button" data-i={2} data-page={10}>
-                                    2
-                                </button>
-                            </li>
-                            <li>
-                                <button className="page" type="button" data-i={3} data-page={10}>
-                                    3
-                                </button>
-                            </li>
-                        </ul>
-                        <button
-                            className="btn btn-sm btn-falcon-default ms-1"
-                            type="button"
-                            title="Next"
-                            data-list-pagination="next"
-                        >
-                            <svg
-                                className="svg-inline--fa fa-chevron-right fa-w-10"
-                                aria-hidden="true"
-                                focusable="false"
-                                data-prefix="fas"
-                                data-icon="chevron-right"
-                                role="img"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 320 512"
-                                data-fa-i2svg=""
-                            >
-                                <path
-                                    fill="currentColor"
-                                    d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
-                                />
-                            </svg>
-                            {/* <span class="fas fa-chevron-right">             </span> Font Awesome fontawesome.com */}
-                        </button>
-                    </div>
-                </div>
+
             </div>
 
         </React.Fragment>

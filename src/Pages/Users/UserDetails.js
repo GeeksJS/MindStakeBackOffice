@@ -2,6 +2,7 @@ import { clear } from '@testing-library/user-event/dist/clear';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import axiosconfig from '../../axiosConfig'
 
 export default function UserDetails() {
 
@@ -15,7 +16,7 @@ export default function UserDetails() {
         const fetchData = async () => {
             try {
                 console.log(id)
-                const { data: response } = await axios.get(`http://localhost:3000/users/${id}`);
+                const { data: response } = await axiosconfig.get(`/users/${id}`);
                 //const data = await setUserDetails(response)
                 console.log(response[0])
                 if (response[0] !== "") {
