@@ -156,7 +156,7 @@ export default function Profile() {
                                     <div className="h-100 w-100 rounded-circle overflow-hidden position-relative">
                                         {" "}
                                         <div className="avatar-name rounded-circle">
-                                            {connect.ImageProfile !== "avatar.png" && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${connect.ImageProfile}`} alt="admin" style={{ borderRadius: '50%' }} />}
+                                            {connect.ImageProfile !== "avatar.png" && <img src={`https://storage.googleapis.com/mindstake_bucket/${connect.ImageProfile}`} alt="admin" style={{ borderRadius: '50%' }} />}
 
                                             {connect.ImageProfile === "avatar.png" && <span>{connect.UserName.charAt(0).toUpperCase()}</span>}
                                         </div>

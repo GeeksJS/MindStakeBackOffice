@@ -67,7 +67,7 @@ export default function SingleUser(props) {
                         <div className="d-flex d-flex align-items-center">
                             <div className="avatar avatar-xl me-2">
                                 <div className="avatar-name rounded-circle">
-                                    {user.ImageProfile !== "avatar.png" && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${user.ImageProfile}`} alt="user" style={{ borderRadius: '50%' }} />}
+                                    {user.ImageProfile !== "avatar.png" && <img src={`https://storage.googleapis.com/mindstake_bucket/${user.ImageProfile}`} alt="user" style={{ borderRadius: '50%' }} />}
 
                                     {user.ImageProfile === "avatar.png" && <span>{user.UserName.charAt(0).toUpperCase()}</span>}
                                 </div>

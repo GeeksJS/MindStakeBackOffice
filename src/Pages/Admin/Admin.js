@@ -103,7 +103,7 @@ export default function Admin() {
                         <div className="d-flex d-flex align-items-center">
                             <div className="avatar avatar-xl me-2">
                                 <div className="avatar-name rounded-circle">
-                                    {admin.ImageProfile !== "avatar.png" && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${admin.ImageProfile}`} alt="admin" style={{borderRadius:'50%'}}/>}
+                                    {admin.ImageProfile !== "avatar.png" && <img src={`https://storage.googleapis.com/mindstake_bucket/${admin.ImageProfile}`} alt="admin" style={{borderRadius:'50%'}}/>}
 
                                     {admin.ImageProfile === "avatar.png" && <span>{admin.UserName.charAt(0).toUpperCase()}</span> }
                                 </div>
