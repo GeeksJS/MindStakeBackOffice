@@ -21,7 +21,7 @@ export default function Admin() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axiosconfig.get(`/users/admins`);
+                const { data: response } = await axios.get(`https://mindstakeback.herokuapp.com/users/admins`);
                 setAdmins(response);
                 console.log(response)
             } catch (error) {

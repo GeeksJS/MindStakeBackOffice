@@ -75,7 +75,7 @@ export default function Project(props) {
                             >
                                 <img
                                     className="img-fluid fit-cover w-sm-100 h-sm-100 rounded-1 absolute-sm-centered"
-                                    src={`${process.env.REACT_APP_API_URL}/uploads/images/${project.Picture}`}
+                                    src={`https://storage.googleapis.com/mindstake_bucket/${project.Picture}`}
                                     alt=""
                                     style={{maxHeight:'300px'}}
                                 />

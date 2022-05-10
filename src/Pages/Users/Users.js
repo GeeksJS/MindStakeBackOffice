@@ -42,16 +42,7 @@ export default function Users() {
             <table className="table table-sm table-striped fs--1 mb-0 overflow-hidden">
                 <thead className="bg-200 text-900">
                     <tr>
-                        <th>
-                            <div className="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input
-                                    className="form-check-input"
-                                    id="checkbox-bulk-customers-select"
-                                    type="checkbox"
-                                    data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'
-                                />
-                            </div>
-                        </th>
+                        
                         <th
                             className="sort pe-1 align-middle white-space-nowrap"
                             data-sort="name"

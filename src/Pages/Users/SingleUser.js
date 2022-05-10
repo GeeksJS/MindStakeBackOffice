@@ -52,16 +52,7 @@ export default function SingleUser(props) {
     return (
         <React.Fragment>
             <tr className="btn-reveal-trigger">
-                <td className="align-middle py-2" style={{ width: 28 }}>
-                    <div className="form-check fs-0 mb-0 d-flex align-items-center">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="customer-0"
-                            data-bulk-select-row="data-bulk-select-row"
-                        />
-                    </div>
-                </td>
+                
                 <td className="name align-middle white-space-nowrap py-2">
                     <a href="../../app/e-commerce/customer-details.html">
                         <div className="d-flex d-flex align-items-center">
